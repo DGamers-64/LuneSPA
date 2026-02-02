@@ -25,7 +25,7 @@ globalCSSPath = "./global.css"
 
 `viewsPath`: Ruta del directorio donde tienes las vistas guardadas.
 
-`compontentsPath`: Ruta del directorio donde tienes los componentes guardados.
+`compontentesPath`: Ruta del directorio donde tienes los componentes guardados.
 
 `globalCSSPath`: Ruta del archivo global CSS.
 
@@ -104,11 +104,22 @@ Los componentes se crean igual y tienen la misma estructura que las vistas. Para
 ```
 `data-component` es el nombre del componente que quieres invocar.
 
+La clase `Componentes` que viene cargada por defecto te permite insertar props fácilmente con el método `setProp()`:
+
+```js
+Componentes.setProp("boton", "id", 0, shadow)
+Componentes.setProp(shadow.querySelector('[data-component="boton"]'), "id", 0, shadow)
+```
+
+Como puedes observar puedes o pasarle el nombre del componente a cargar o el elemento como tal en el primer argumento. El segundo argumento es el nombre del prop, el tercer argumento es su valor y el cuarto argumento debe de ser `shadow`.
+
 Para poder ejecutar los componentes una vez ya los tengas preparados debes de ejecutar la siguiente línea en tu vista:
 
 ```js
 Componentes.cargarComponentes(shadow)
 ```
+
+Recuerda siempre pasarle `shadow` para que funcione correctamente.
 
 Dentro del componente para obtener los atributos pasados en el dataset se debe de acceder al objeto `props`.
 

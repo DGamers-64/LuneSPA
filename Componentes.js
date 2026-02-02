@@ -58,4 +58,21 @@ export default class Componentes {
             await Componentes.cargarComponente(el)
         }
     }
+
+    static setProp(target, key, value, root = document) {
+        let el
+
+        if (typeof target === "string") {
+            el = root.querySelector(`[data-component='${target}']`)
+            if (!el) return
+        } else if (target instanceof HTMLElement) {
+            el = target
+        } else {
+            return
+        }
+
+        el.dataset[key] = value
+
+        return el
+    }
 }
