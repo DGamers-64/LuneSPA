@@ -109,22 +109,7 @@ Los componentes se crean igual y tienen la misma estructura que las vistas. Para
 ```
 `data-component` es el nombre del componente que quieres invocar.
 
-La clase `Componentes` que viene cargada por defecto te permite insertar props fácilmente con el método `setProp()`:
-
-```js
-Componentes.setProp("boton", "id", 0, shadow)
-Componentes.setProp(shadow.querySelector('[data-component="boton"]'), "id", 0, shadow)
-```
-
-Como puedes observar puedes o pasarle el nombre del componente a cargar o el elemento como tal en el primer argumento. El segundo argumento es el nombre del prop, el tercer argumento es su valor y el cuarto argumento debe de ser `shadow`.
-
-Para poder ejecutar los componentes una vez ya los tengas preparados debes de ejecutar la siguiente línea en tu vista:
-
-```js
-Componentes.cargarComponentes(shadow)
-```
-
-Recuerda siempre pasarle `shadow` para que funcione correctamente.
+La clase `Componentes` que viene cargada por defecto te permite usar distintos métodos relacionados a los componentes.
 
 Dentro del componente para obtener los atributos pasados en el dataset se debe de acceder al objeto `props`.
 
@@ -132,6 +117,28 @@ Dentro del componente para obtener los atributos pasados en el dataset se debe d
 const id = props.id
 console.log(id) // 0 con el primer componente mostrado arriba
 ```
+
+### Métodos
+
+#### cargarComponente(target: String | HTMLElement, root: HTMLElement)
+Carga el componente seleccionado, puedes pasar solamente el nombre del elemento o el elemento tal cual.
+
+#### cargarComponentes(root: HTMLElement)
+Carga todos los componentes ubicados en la página.
+
+#### setProp(target: String | HTMLElement, key: String, value: any, root: HTMLElement)
+Inserta props al componente seleccionado, ya sea pasando el elemento o el nombre del componente a secas. El segundo argumento es la clave del prop, el tercero el valor y el cuarto el elemento `shadow`.
+
+```js
+Componentes.setProp("boton", "id", 0, shadow)
+Componentes.setProp(shadow.querySelector('[data-component="boton"]'), "id", 0, shadow)
+```
+
+#### descargar(target: String | HTMLElement, root: HTMLElement)
+Destruye el componente seleccionado, esto se puede invocar desde el propio componente usando el elemento `container`.
+
+#### crearComponente(target: String | HTMLElement, props: Object) -> HTMLElement
+Crea un componente y lo devuelve, permitiendo pasar un objeto con los `props` a insertar en este. Recuerda anidarlo a tu shadow una vez creado.
 
 ## CSS Global
 Para poder tener una coherencia visual y no tener que estar siempre importando los mismos archivos CSS con estilos globales, el propio mini-framework importa automáticamente unos estilos globales a todas las vistas y componentes para fácil uso.

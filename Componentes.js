@@ -5,7 +5,18 @@ export default class Componentes {
         Componentes.basePath = path
     }
 
-    static async cargarComponente(container) {
+    static async cargarComponente(target, root = document) {
+        let container
+
+        if (typeof target === "string") {
+            container = root.querySelector(`[data-component='${target}']`)
+        } else if (target instanceof HTMLElement) {
+            container = target
+        } else {
+            return
+        }
+
+        if (!container) return
         if (container.shadowRoot) return
 
         const nombre = container.dataset.component
@@ -45,9 +56,10 @@ export default class Componentes {
                     "container",
                     "shadow",
                     "props",
+                    "Componentes",
                     oldScript.textContent
                 )
-                fn(container, shadow, container.dataset)
+                fn(container, shadow, container.dataset, Componentes)
             }
         })
     }
@@ -73,6 +85,33 @@ export default class Componentes {
 
         el.dataset[key] = value
 
+        return el
+    }
+
+    static descargar(target, root = document) {
+        let el
+
+        if (typeof target === "string") {
+            el = root.querySelector(`[data-component='${target}']`)
+        } else if (target instanceof HTMLElement) {
+            el = target
+        }
+
+        if (!el) return
+
+        if (el.shadowRoot) {
+            el.shadowRoot.innerHTML = ""
+        }
+
+        el.remove()
+    }
+
+    static crearComponente(nombre, props = {}) {
+        const el = document.createElement("div")
+        el.dataset.component = nombre
+        Object.entries(props).forEach(([k, v]) => {
+            el.dataset[k] = v
+        })
         return el
     }
 }
