@@ -3,9 +3,14 @@ LuneSPA es un mini-framework enfocado a hacer páginas SPA de una forma sencilla
 ## Uso
 Para usar esta librería es tan sencillo como poner a tu `index.js` las siguientes líneas:
 ```js
-import createApp from "./routerSPA/index.js";
+import createApp from "./LuneSPA/index.js";
 
 createApp().start()
+```
+
+También puedes usar un CDN como `jsdelivr.net` con la línea:
+```
+https://cdn.jsdelivr.net/gh/DGamers-64/LuneSPA@main/index.js
 ```
 
 Además debes de tener en el `index.html` principal un contenedor con un id (por defecto `"app"`).
