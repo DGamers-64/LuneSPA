@@ -1,4 +1,4 @@
-import Componentes from "./Componentes.js"
+import Componentes from "https://cdn.jsdelivr.net/gh/DGamers-64/LuneSPA@main/Componentes.js";
 
 export default function createApp({
     rootId = "app",
