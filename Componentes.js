@@ -5,24 +5,23 @@ export default class Componentes {
         Componentes.basePath = path
     }
 
-    static async cargarComponente(target, root = document) {
-        let container
+    static async cargarComponente(target) {
+        let el
 
         if (typeof target === "string") {
-            container = root.querySelector(`[data-component='${target}']`)
+            el = document.querySelector(`[data-component='${target}']`)
+            if (!el) return
         } else if (target instanceof HTMLElement) {
-            container = target
+            el = target
         } else {
             return
         }
 
-        if (!container) return
-        if (container.shadowRoot) return
+        if (el.shadowRoot) return
 
-        const nombre = container.dataset.component
+        const shadow = el.attachShadow({ mode: "open" })
+        const nombre = el.dataset.component
         if (!nombre) return
-
-        const shadow = container.attachShadow({ mode: "open" })
 
         const res = await fetch(`${this.basePath}/${nombre}.html`)
         const htmlText = await res.text()
@@ -54,12 +53,11 @@ export default class Componentes {
             } else {
                 const fn = new Function(
                     "container",
-                    "shadow",
                     "props",
                     "Componentes",
                     oldScript.textContent
                 )
-                fn(container, shadow, container.dataset, Componentes)
+                fn(el, el.dataset, Componentes)
             }
         })
     }
@@ -71,47 +69,34 @@ export default class Componentes {
         }
     }
 
-    static setProp(target, key, value, root = document) {
+    static setProp(target, key, value) {
         let el
-
         if (typeof target === "string") {
-            el = root.querySelector(`[data-component='${target}']`)
-            if (!el) return
+            el = document.querySelector(`[data-component='${target}']`)
         } else if (target instanceof HTMLElement) {
             el = target
-        } else {
-            return
         }
-
+        if (!el) return
         el.dataset[key] = value
-
         return el
     }
 
-    static descargar(target, root = document) {
+    static descargar(target) {
         let el
-
         if (typeof target === "string") {
-            el = root.querySelector(`[data-component='${target}']`)
+            el = document.querySelector(`[data-component='${target}']`)
         } else if (target instanceof HTMLElement) {
             el = target
         }
-
         if (!el) return
-
-        if (el.shadowRoot) {
-            el.shadowRoot.innerHTML = ""
-        }
-
+        if (el.shadowRoot) el.shadowRoot.innerHTML = ""
         el.remove()
     }
 
     static crearComponente(nombre, props = {}) {
         const el = document.createElement("div")
         el.dataset.component = nombre
-        Object.entries(props).forEach(([k, v]) => {
-            el.dataset[k] = v
-        })
+        Object.entries(props).forEach(([k, v]) => (el.dataset[k] = v))
         return el
     }
 }

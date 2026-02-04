@@ -120,21 +120,21 @@ console.log(id) // 0 con el primer componente mostrado arriba
 
 ### Métodos
 
-#### cargarComponente(target: String | HTMLElement, root: HTMLElement)
+#### cargarComponente(target: String | HTMLElement)
 Carga el componente seleccionado, puedes pasar solamente el nombre del elemento o el elemento tal cual.
 
 #### cargarComponentes(root: HTMLElement)
-Carga todos los componentes ubicados en la página.
+Carga todos los componentes ubicados en la página. Es necesario pasarle el argumento `shadow`.
 
-#### setProp(target: String | HTMLElement, key: String, value: any, root: HTMLElement)
-Inserta props al componente seleccionado, ya sea pasando el elemento o el nombre del componente a secas. El segundo argumento es la clave del prop, el tercero el valor y el cuarto el elemento `shadow`.
+#### setProp(target: String | HTMLElement, key: String, value: any)
+Inserta props al componente seleccionado, ya sea pasando el elemento o el nombre del componente a secas. El segundo argumento es la clave del prop y el tercero el valor.
 
 ```js
-Componentes.setProp("boton", "id", 0, shadow)
-Componentes.setProp(shadow.querySelector('[data-component="boton"]'), "id", 0, shadow)
+Componentes.setProp("boton", "id", 0)
+Componentes.setProp(shadow.querySelector('[data-component="boton"]'), "id", 0)
 ```
 
-#### descargar(target: String | HTMLElement, root: HTMLElement)
+#### descargar(target: String | HTMLElement)
 Destruye el componente seleccionado, esto se puede invocar desde el propio componente usando el elemento `container`.
 
 #### crearComponente(target: String | HTMLElement, props: Object) -> HTMLElement
