@@ -1,8 +1,8 @@
-export default class Componentes {
-    static basePath = "./componentes"
+export default class Components {
+    static basePath = "./components"
 
     static setBasePath(path) {
-        Componentes.basePath = path
+        Components.basePath = path
     }
 
     static async cargarComponente(target, root = document) {
@@ -64,9 +64,9 @@ export default class Componentes {
     }
 
     static async cargarComponentes(root = document) {
-        const componentes = root.querySelectorAll("[data-component]")
-        for (const el of componentes) {
-            await Componentes.cargarComponente(el)
+        const components = root.querySelectorAll("[data-component]")
+        for (const el of components) {
+            await Components.cargarComponente(el)
         }
     }
 
@@ -115,4 +115,4 @@ export default class Componentes {
     }
 }
 
-window.Componentes = Componentes
+window.Components = Components

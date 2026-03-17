@@ -1,15 +1,15 @@
-import Componentes from "./Componentes.js"
+import Components from "./Components.js"
 
 
 export default function createApp({
     rootId = "app",
     indexView = "index",
     viewsPath = "./views",
-    componentesPath = "./componentes",
+    componentsPath = "./components",
     globalCSSPath = "./global.css"
 } = {}) {
 
-    Componentes.setBasePath(componentesPath)
+    Components.setBasePath(componentsPath)
 
     const root = document.getElementById(rootId)
     if (!root) throw new Error(`No existe #${rootId}`)

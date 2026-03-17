@@ -20,7 +20,7 @@ Existen algunas configuraciones que le puedes pasar a `createApp()` en forma de 
 rootId = "app",
 indexView = "index",
 viewsPath = "./views",
-componentesPath = "./componentes",
+componentsPath = "./components",
 globalCSSPath = "./global.css"
 ```
 
@@ -39,14 +39,14 @@ globalCSSPath = "./global.css"
 Un ejemplo de árbol de directorios que podrías tener para un proyecto sería este:
 ```bash
 .
-├── componentes
+├── components
 │   ├── componenteBotonCompra.html
 │   └── componenteListaProductos.html
 ├── global.css
 ├── index.html
 ├── index.js
 ├── LuneSPA
-│   ├── Componentes.js
+│   ├── Components.js
 │   └── index.js
 └── views
     ├── index.html
@@ -109,7 +109,7 @@ Los componentes se crean igual y tienen la misma estructura que las vistas. Para
 ```
 `data-component` es el nombre del componente que quieres invocar.
 
-La clase `Componentes` que viene cargada por defecto te permite usar distintos métodos relacionados a los componentes.
+La clase `Components` que viene cargada por defecto te permite usar distintos métodos relacionados a los componentes.
 
 Dentro del componente para obtener los atributos pasados en el dataset se debe de acceder al objeto `props`.
 
@@ -130,8 +130,8 @@ Carga todos los componentes ubicados en la página. Es necesario pasarle el argu
 Inserta props al componente seleccionado, ya sea pasando el elemento o el nombre del componente a secas. El segundo argumento es la clave del prop y el tercero el valor.
 
 ```js
-Componentes.setProp("boton", "id", 0)
-Componentes.setProp(shadow.querySelector('[data-component="boton"]'), "id", 0)
+Components.setProp("boton", "id", 0)
+Components.setProp(shadow.querySelector('[data-component="boton"]'), "id", 0)
 ```
 
 #### descargar(target: String | HTMLElement)

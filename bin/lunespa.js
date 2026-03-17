@@ -73,7 +73,7 @@ else if (command === "build") {
   const frameworkDest = join(DIST, "lunespa");
   await mkdir(frameworkDest, { recursive: true });
   await cp(join(FRAMEWORK_DIR, "index.js"), join(frameworkDest, "index.js"));
-  await cp(join(FRAMEWORK_DIR, "Componentes.js"), join(frameworkDest, "Componentes.js"));
+  await cp(join(FRAMEWORK_DIR, "Components.js"), join(frameworkDest, "Components.js"));
 
   const htmlPath = join(DIST, "index.html");
   let html = await readFile(htmlPath, "utf8");
@@ -87,7 +87,7 @@ else if (command === "build") {
 }
 
 else if (command === "init") {
-  const dirs = ["public/views", "public/componentes"];
+  const dirs = ["public/views", "public/components"];
   for (const d of dirs) await mkdir(join(CWD, d), { recursive: true });
 
   await writeFile(join(CWD, "public/index.html"), `<!DOCTYPE html>
