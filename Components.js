@@ -1,8 +1,13 @@
 export default class Components {
-    static basePath = "./components"
+    static basePath = null
+    static globalCSSPath = null
 
     static setBasePath(path) {
         Components.basePath = path
+    }
+
+    static setGlobalCSS(path) {
+        Components.globalCSSPath = path
     }
 
     static async cargarComponente(target, root = document) {
@@ -23,6 +28,13 @@ export default class Components {
         if (!nombre) return
 
         const shadow = container.attachShadow({ mode: "open" })
+
+        if (Components.globalCSSPath) {
+            const link = document.createElement("link")
+            link.rel = "stylesheet"
+            link.href = Components.globalCSSPath
+            shadow.appendChild(link)
+        }
 
         const res = await fetch(`${this.basePath}/${nombre}.html`)
         const htmlText = await res.text()

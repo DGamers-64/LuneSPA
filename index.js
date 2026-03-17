@@ -1,6 +1,5 @@
 import Components from "./Components.js"
 
-
 export default function createApp({
     rootId = "app",
     indexView = "index",
@@ -10,6 +9,7 @@ export default function createApp({
 } = {}) {
 
     Components.setBasePath(componentsPath)
+    Components.setGlobalCSS(globalCSSPath)
 
     const root = document.getElementById(rootId)
     if (!root) throw new Error(`No existe #${rootId}`)
