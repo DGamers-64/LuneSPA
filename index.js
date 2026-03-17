@@ -1,4 +1,5 @@
-import Componentes from "https://cdn.jsdelivr.net/gh/DGamers-64/LuneSPA@main/Componentes.js";
+import Componentes from "./Componentes.js"
+
 
 export default function createApp({
     rootId = "app",
@@ -75,8 +76,8 @@ export default function createApp({
                 shadow.appendChild(s)
                 inyectados.scripts.push(s)
             } else {
-                const fn = new Function("shadow", "params", "Componentes", oldScript.textContent)
-                fn(shadow, window.params, Componentes)
+                const fn = new Function("shadow", "params", oldScript.textContent)
+                fn(shadow, window.params)
             }
         })
     }
