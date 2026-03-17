@@ -2,15 +2,18 @@
 
 import { createServer } from "http";
 import { readFile, cp, mkdir, writeFile } from "fs/promises";
-import { join, extname } from "path";
+import { dirname, join, extname } from "path";
 import { watch } from "chokidar";
+import { fileURLToPath } from "url";
 
 const command = process.argv[2];
 const CWD = process.cwd();
 const PUBLIC = join(CWD, "public");
 const DIST = join(CWD, "dist");
 
-const FRAMEWORK_DIR = new URL("..", import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const FRAMEWORK_DIR = join(__dirname, "..");
 
 const MIME = {
   ".html": "text/html",
