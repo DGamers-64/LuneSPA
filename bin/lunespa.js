@@ -93,8 +93,15 @@ else if (command === "init") {
   await writeFile(join(CWD, "public/index.html"), `<!DOCTYPE html>
 <html lang="es">
 <head>
+  <link rel="stylesheet" href="global.css">
   <meta charset="UTF-8">
   <title>LuneSPA App</title>
+  <style>
+    #app {
+      width: 100dvw;
+      height: 100dvh;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
