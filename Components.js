@@ -125,6 +125,24 @@ export default class Components {
         })
         return el
     }
+
+    static emit(container, event, detail = {}) {
+        container.dispatchEvent(new CustomEvent(event, {
+            bubbles: true,
+            composed: true,
+            detail
+        }))
+    }
+
+    static send(root, componentName, event, detail = {}) {
+        const el = root.querySelector(`[data-component='${componentName}']`)
+        if (!el) return
+        el.dispatchEvent(new CustomEvent(event, { detail }))
+    }
+
+    static on(container, event, callback) {
+        container.addEventListener(event, (e) => callback(e.detail, e))
+    }
 }
 
 window.Components = Components
